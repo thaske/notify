@@ -12,7 +12,7 @@ async function main() {
   const status = $("div.buybox span.btn").first().text();
   console.log(status);
 
-  if (status == "Buy") {
+  if (status === "Buy") {
     notifier.notify({
       title: "In stock",
       message: "***REMOVED***",
