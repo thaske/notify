@@ -13,14 +13,9 @@ async function main() {
   console.log(status);
 
   if (status === "Buy") {
-    notifier.notify({
-      title: "In stock",
-      message: "***REMOVED***",
-    });
-    notifier.on("click", () => {
-      exec(`open -a "Google Chrome" ${url}`);
-      process.exit(1);
-    });
+    notifier.notify("In stock");
+    exec(`open -a "Google Chrome" ${url}`);
+    process.exit(1);
   }
 }
 
