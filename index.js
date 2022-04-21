@@ -1,20 +1,20 @@
 import axios from "axios";
-import notifier from "node-notifier";
-import * as cheerio from "cheerio";
-import { exec } from "child_process";
 import cron from "node-cron";
+import * as cheerio from "cheerio";
+import notifier from "node-notifier";
+import { exec } from "child_process";
 
-const url = "***REMOVED***";
+const { URL, SELECTOR, INSTOCK } = process.env;
 
 async function main() {
-  const { data } = await axios.get(url);
+  const { data } = await axios.get(URL);
   const $ = cheerio.load(data);
-  const status = $("div.buybox span.btn").first().text();
+  const status = $(SELECTOR).first().text();
   console.log(status);
 
-  if (status === "Buy") {
+  if (status === INSTOCK) {
     notifier.notify("In stock");
-    exec(`open -a "Google Chrome" ${url}`);
+    exec(`open -a "Google Chrome" ${URL}`);
     process.exit(1);
   }
 }
