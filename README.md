@@ -1,7 +1,9 @@
 # notify
- 
-script to check for when a product is in-stock
 
+notifies you when something is in-stock
+
+
+## setup
 ```bash
 yarn install            # install necessary packages
 cp .env.example .env    # copy .env.example 
