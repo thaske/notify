@@ -10,7 +10,9 @@ async function main() {
   const { data } = await axios.get(URL);
   const $ = cheerio.load(data);
   const status = $(SELECTOR).first().text();
-  console.log(`${new Date().toLocaleTimeString()}\t${status}`);
+
+  process.stdout.cursorTo(0);
+  process.stdout.write(`${new Date().toLocaleTimeString()}\t${status}`);
 
   if (status === INSTOCK) {
     notifier.notify("In stock");
