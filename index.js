@@ -15,8 +15,8 @@ async function main() {
   process.stdout.write(`${new Date().toLocaleTimeString()}\t${status}`);
 
   if (status === INSTOCK) {
-    notifier.notify("In stock");
     exec(`open -a "Google Chrome" ${URL}`);
+    notifier.notify("In stock");
     process.exit(0);
   }
 }
