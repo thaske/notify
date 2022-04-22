@@ -9,8 +9,7 @@
     "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^16.0.0",
-    "node-cron": "^3.0.0",
-    "node-notifier": "^10.0.1"
+    "node-cron": "^3.0.0"
   },
   "scripts": {
     "start": "node -r dotenv/config index.js"
