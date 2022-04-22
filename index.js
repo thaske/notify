@@ -17,7 +17,7 @@ async function main() {
   if (status === INSTOCK) {
     notifier.notify("In stock");
     exec(`open -a "Google Chrome" ${URL}`);
-    process.exit(1);
+    process.exit(0);
   }
 }
 
