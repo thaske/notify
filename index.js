@@ -10,7 +10,7 @@ cron.schedule("*/15 * * * * *", async () => {
   const $ = cheerio.load(data);
   const status = $(SELECTOR).first().text();
   console.log(`${new Date().toLocaleTimeString()}\t${status}`);
-  
+
   if (status === INSTOCK) {
     exec(`open -a "Google Chrome" ${URL}`);
     process.exit(0);
