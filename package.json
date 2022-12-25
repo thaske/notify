@@ -9,10 +9,13 @@
     "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^16.0.0",
-    "node-cron": "^3.0.0"
+    "node-cron": "^3.0.0",
+    "node-fetch": "^3.3.0",
+    "playwright": "^1.29.1",
+    "puppeteer": "^19.4.1"
   },
   "scripts": {
-    "start": "node -r dotenv/config index.js"
+    "start": "node --experimental-json-modules -r dotenv/config index.js"
   },
   "type": "module"
 }

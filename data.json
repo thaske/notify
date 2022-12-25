@@ -1,0 +1,13 @@
+{
+  "type": "err",
+  "data": {
+    "error": "Internal error 1a49e0446dcd46fbb32dabccb134f0b57c440587 at request b48c5bed-a89b-42d0-bbb5-c545f277eb83"
+  },
+  "status": 422,
+  "debug": {
+    "reqid": "b48c5bed-a89b-42d0-bbb5-c545f277eb83",
+    "took": 35,
+    "sessionTook": 10,
+    "sessionOwner": "W"
+  }
+}
