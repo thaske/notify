@@ -16,10 +16,7 @@ cron.schedule(`*/${SECONDS ?? 15} * * * * *`, async () => {
         const $ = cheerio.load(data);
 
         let status = $(SELECTOR).first().text().trim();
-        if (status.length === 0) {
-          status = "OUT OF STOCK";
-        }
-
+        if (status.length === 0) status = "OUT OF STOCK";
         console.log(`${new Date().toLocaleTimeString()}\t${status}\t${site}`);
 
         if (status === INSTOCK) {
@@ -27,8 +24,10 @@ cron.schedule(`*/${SECONDS ?? 15} * * * * *`, async () => {
           process.exit(0);
         }
       } catch (error) {
-        console.error;
+        console.error(error);
       }
     }
   );
+
+  await Promise.all(promises);
 });
