@@ -25,7 +25,7 @@ const request = axios.create({
 
 cron.schedule(`*/${SECONDS ?? 15} * * * * *`, async () => {
   const promises = Object.entries(SITES).map(
-    async ([site, { LINK, SELECTOR, INSTOCK }]) => {
+    async ([site, { LINK, SELECTOR, IN_STOCK, SOLD_OUT }]) => {
       try {
         const { data } = await request.get(LINK, {
           headers: {
@@ -41,7 +41,7 @@ cron.schedule(`*/${SECONDS ?? 15} * * * * *`, async () => {
 
         console.log(`${new Date().toLocaleTimeString()}\t${status}\t${site}`);
 
-        if (status === INSTOCK) {
+        if (status === IN_STOCK || status != SOLD_OUT) {
           exec(`afplay /System/Library/Sounds/Glass.aiff`);
           exec(`open -a "Google Chrome" ${LINK}`);
           process.exit(0);
