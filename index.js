@@ -43,7 +43,7 @@ cron.schedule(`*/${SECONDS ?? 15} * * * * *`, async () => {
 
         if (status === IN_STOCK || status != SOLD_OUT) {
           exec(`afplay /System/Library/Sounds/Glass.aiff`);
-          exec(`open -a "Google Chrome" ${LINK}`);
+          exec(`open -a Safari ${LINK}`);
           process.exit(0);
         }
       } catch (error) {
