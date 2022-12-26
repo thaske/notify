@@ -1,21 +1,36 @@
+import fs from "fs";
 import axios from "axios";
+import jsonc from "jsonc";
 import cron from "node-cron";
 import * as cheerio from "cheerio";
 import { exec } from "child_process";
 
-const { URL, SELECTOR, INSTOCK, SECONDS } = process.env;
+const { SECONDS } = process.env;
+const sites = jsonc.parse(fs.readFileSync("sites.jsonc", "utf8"));
 
-const cronInterval = `*/${SECONDS ?? 15} * * * * *`;
+cron.schedule(`*/${SECONDS ?? 15} * * * * *`, async () => {
+  const promises = Object.values(sites).map(
+    async ({ URL, SELECTOR, INSTOCK }) => {
+      try {
+        const { data } = await axios.get(URL);
+        const $ = cheerio.load(data);
 
-cron.schedule(cronInterval, async () => {
-  const { data } = await axios.get(URL);
-  const $ = cheerio.load(data);
-  const status = $(SELECTOR).first().text();
+        let status = $(SELECTOR).first().text().trim();
+        if (status.length === 0) {
+          status = "OUT OF STOCK";
+        }
 
-  console.log(`${new Date().toLocaleTimeString()}\t${status}`);
+        console.log(`${new Date().toLocaleTimeString()}\t${status}\t${URL}`);
 
-  if (status === INSTOCK) {
-    exec(`open -a "Google Chrome" ${URL}`);
-    process.exit(0);
-  }
+        if (status === INSTOCK) {
+          exec(`open -a "Google Chrome" ${URL}`);
+          process.exit(0);
+        }
+      } catch (error) {
+        console.error(error, URL);
+      }
+    }
+  );
+
+  await Promise.all(promises);
 });
