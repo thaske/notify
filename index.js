@@ -42,7 +42,8 @@ cron.schedule(`*/${SECONDS ?? 15} * * * * *`, async () => {
         console.log(`${new Date().toLocaleTimeString()}\t${status}\t${site}`);
 
         if (status === INSTOCK) {
-          exec(`open -a "Google Chrome" ${URL}`);
+          exec(`afplay /System/Library/Sounds/Glass.aiff`);
+          exec(`open -a "Google Chrome" ${LINK}`);
           process.exit(0);
         }
       } catch (error) {
