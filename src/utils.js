@@ -25,7 +25,7 @@ function getStockStatus(data, selector) {
 function onSuccess(site, status) {
   if (status === site.IN_STOCK || status != site.SOLD_OUT) {
     exec(`afplay /System/Library/Sounds/Glass.aiff`);
-    exec(`open -a Safari ${site.LINK}`);
+    exec(`open -a "Google Chrome" ${site.LINK}`);
 
     process.exit(0);
   }
