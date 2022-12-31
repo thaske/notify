@@ -14,7 +14,7 @@ SITES.forEach((site, index) => {
       logStatus(site, status);
       onSuccess(site, status);
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
   });
 });
